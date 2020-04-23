@@ -1,0 +1,379 @@
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="keystyle.css" />
+    <!--<link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto'>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    <!-- jQuery library -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="keyboard.js"></script>
+    <style>
+    
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+    
+    body, html {
+      height: 100%;
+      line-height: 1.8;
+    }
+    #img{
+    width:100; height:100;}
+    
+    /* Full height image header */
+    .bgimg-1 {
+      background-position: center;
+      background-size: cover;
+      background-image: url("http://www.liveonbeauty.org/upload/2018/09/08/blue-light-rays-and-snow-hd-motion-graphics-background-ray-lighting-l-aba7aabcad349c80.jpg");
+      min-height: 100%;
+    }
+    
+    .w3-bar .w3-button {
+      padding: 16px;
+      float: left;
+    }
+    .webflow-style-input input {
+      flex-grow: 1;
+      color: $input-text-active;
+      font-size: 1.5rem;
+      line-height: 2.4rem;
+      vertical-align: middle;
+      &::-webkit-input-placeholder {
+        color: $input-text-inactive;
+      }
+    }
+    
+      .one{
+        background-color: green !important;
+        width: 1000px;
+        }
+        .red{
+          color: red;
+        }
+    
+      </style>
+    
+      <script>
+     function play(x){
+        var msg=document.getElementById("write").innerHTML;
+        msg=msg.toLowerCase();
+        var checkbox = document.getElementById('enable_keyboard');
+        if (checkbox.checked == true){
+        var str = '';
+    
+          for (var i = 0; i < msg.length; i++) {
+            var idx = msg.indexOf('src', i);
+            if (idx == -1) {
+              break;
+            }
+            str += msg[idx + 5];
+            i = idx;
+            console.log(i);
+          }
+    
+          console.log(str);
+    hear(str);
+    
+          var vlen = str.length,
+            j = x;
+            var word="";
+            while(j<vlen){
+              if(str.charAt(j)!=''){
+              word+=str.charAt(j);}
+             if(str.charAt(j)==''||j==vlen-1){
+              // r=display(word,x);
+              word="";
+              break;
+            }
+            ++j;
+          }}
+    
+        else{
+    document.getElementById('a').href="#show";
+        console.log(msg);
+        var wlen=msg.length,k=x;
+        var word="";
+        while(k<wlen){
+          if(msg.charAt(k)!=' '){
+            word+=msg.charAt(k);}
+          if(msg.charAt(k)==' '||k==wlen-1){
+            console.log(word);
+            display(word,x);
+    
+              word="";
+              break;
+            }
+        ++k;
+          }
+    
+    }
+    }//play()close
+    
+    function display(word,x)
+    {
+    
+    console.log(word);
+    var fch = word.charAt(0);
+    console.log(fch);
+    var url = "https://www.handspeak.com/word/" + fch + "/" + word + ".mp4";
+    console.log(url);
+    UrlExists(url,word,x);
+    
+    }
+    function UrlExists(url,word,x) {
+      console.log("in url exist function"+word)
+    var len= word.length;
+    var strLn=len+x;
+       var http = new XMLHttpRequest();
+       http.open('HEAD', url, false);
+       http.send();
+       console.log(http.status);
+    
+    
+    
+       if (http.status != 403)
+           //  if the video is available
+           {
+    
+             var video=document.getElementById('video');
+          var source=document.createElement('source');
+          var vsrc = document.createAttribute("src");
+              var sid = document.createAttribute("id");
+               var type = document.createAttribute("type");
+                  sid.value="sid";
+                  type.value="video/mp4";
+    
+             vsrc.value=url;
+          source.setAttributeNode(vsrc);
+          source.setAttributeNode(type);
+    source.setAttributeNode(sid);
+             video.appendChild(source);
+          video.style.visibility="visible";
+           play(strLn);
+           
+        }// http status checking if close
+       else
+    
+    {
+    //fingerspelling
+    var promise= new Promise(function(resolve,report){
+      var i=0,timeout=1200;
+      var ch;
+    
+      var len=word.length;
+    
+    
+    var intervalObject = setInterval(function () {
+              ch=word.charAt(i);
+              console.log(ch);
+              if(ch!=" ")
+              {
+                          var image=document.createElement("img");
+                          var id=document.createAttribute("id");
+                          id.value="img";
+                          var class1=document.createAttribute("class");
+                          class1.value="myimg";
+                            image.setAttributeNode(id);
+                            image.setAttributeNode(class1);
+                          var src = document.createAttribute("src");
+                          var imgdiv=document.getElementById("imgdiv");
+                          imgdiv.appendChild(image);
+              //src.value = "/message/"+ch;
+      src.value=ch+".png";
+      console.log(src);
+              image.setAttributeNode(src);
+            }
+      i++;
+    
+            if (i == len+1) {
+                  console.log('exiting');
+    
+                  clearInterval(intervalObject);
+                  resolve("done");
+    
+              }
+    
+          }, timeout);
+    if(i>len){reject("yo");}
+    });//promise close
+    promise.then(function(successMessage) {
+      imgdiv=document.getElementById('imgdiv');
+      while(imgdiv.hasChildNodes()) {
+    imgdiv.removeChild(imgdiv.childNodes[0]);
+    }
+                play(strLn+1);
+    
+            console.log(successMessage);
+        }, function(errorMessage) {
+           //error handler function is invoked
+            console.log(errorMessage);
+        }) ;
+    }//else close
+    
+    
+    
+    }//urlExists  close
+    
+    
+    
+    
+      function remove(){
+    
+        var img =document.getElementById("img");
+        var video=document.getElementById("video");
+        var source=document.getElementById("source");
+        if(img){
+        img.parentNode.removeChild(img);}
+    
+      }
+    
+    
+    
+      </script>
+    
+    </head>
+    
+    
+        <body>
+    <!-- NAvbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">BTG</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Team</a>
+          </li>
+    
+        </ul>
+      </div>
+    </nav>
+    <!-- End of NAvbar -->
+              <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+      <div class="w3-display-left w3-text-white" style="padding:48px">
+        <span class="w3-jumbo w3-hide-small">BRIDGE THE GAP</span><br>
+        <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something that matters</span><br>
+        <span class="w3-large">An easy way to interact and share your thoughts no matter what kind of language you understand .</span>
+        <div class="webflow-style-input">
+    
+        <!-- textbox & keyboard -->
+          <div id="container">
+            <div id="write" contenteditable="true"></div>
+            <ul id="keyboard" style="display:none">
+                <li class="symbol"><span class="off">`</span><span class="on">~</span></li>
+                <li class="symbol"><span class="off"><img src="1.png" height="40px" width="40px"></span><span
+                        class="on">!</span></li>
+                <li class="symbol"><span class="off"><img src="2.png" height="40px" width="40px"></span><span
+                        class="on">@</span></li>
+                <li class="symbol"><span class="off"><img src="3.png" height="40px" width="40px"></span><span
+                        class="on">#</span></li>
+                <li class="symbol"><span class="off"><img src="4.png" height="40px" width="40px"></span><span
+                        class="on">$</span></li>
+                <li class="symbol"><span class="off"><img src="5.png" height="40px" width="40px"></span><span
+                        class="on">%</span></li>
+                <li class="symbol"><span class="off"><img src="6.png" height="40px" width="40px"></span><span
+                        class="on">^</span></li>
+                <li class="symbol"><span class="off"><img src="7.png" height="40px" width="40px"></span><span
+                        class="on">&amp;</span></li>
+                <li class="symbol"><span class="off"><img src="8.png" height="40px" width="40px"></span><span
+                        class="on">*</span></li>
+                <li class="symbol"><span class="off"><img src="9.png" height="40px" width="40px"></span><span
+                        class="on">(</span></li>
+                <li class="symbol"><span class="off"><img src="0.png" height="40px" width="40px"></span><span
+                        class="on">)</span></li>
+                <li class="symbol"><span class="off">-</span><span class="on">_</span></li>
+                <li class="symbol"><span class="off">=</span><span class="on">+</span></li>
+                <li class="delete lastitem">delete</li>
+                <li class="tab">tab</li>
+                <li class="letter"><img src="q.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="w.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="e.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="r.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="t.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="y.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="u.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="i.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="o.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="p.png" height="40px" width="40px"></li>
+                <li class="symbol"><span class="off">[</span><span class="on">{</span></li>
+                <li class="symbol"><span class="off">]</span><span class="on">}</span></li>
+                <li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
+                <li class="capslock">caps lock</li>
+                <li class="letter"><img src="a.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="s.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="d.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="f.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="g.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="h.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="j.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="k.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="l.png" height="40px" width="40px"></li>
+                <li class="symbol"><span class="off">;</span><span class="on">:</span></li>
+                <li class="symbol"><span class="off">'</span><span class="on">&quot;</span></li>
+                <li class="enter lastitem">enter</li>
+                <li class="left-shift">shift</li>
+                <li class="letter"><img src="z.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="x.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="c.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="v.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="b.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="n.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="m.png" height="40px" width="40px"></li>
+                <li class="symbol"><span class="off">,</span><span class="on">&lt;</span></li>
+                <li class="symbol"><span class="off">.</span><span class="on">&gt;</span></li>
+                <li class="symbol"><span class="off">/</span><span class="on">?</span></li>
+                <li class="right-shift lastitem">shift</li>
+                <li class="space lastitem">space&nbsp;</li>
+            </ul>
+        </div>
+        <br><br><br><br><br><br>
+        <input type="checkbox" name="enable_keyboard" onclick="showKeyboard()" id="enable_keyboard"> Enable On-Screen Keyboard
+    
+        <br><br>
+        <p><button class="btn btn-lg btn-danger" value="play" onclick="play(0)" style="opacity:0.5"><a  id="a" href="#"  style="margin-top:5px; float:left">PLAY THE MESSAGE</a></button></p>
+        <button class="mi fa fa-microphone" onclick="startDictation()"></button>
+        <button class="mi fa fa-volume-up" onclick="hear()"></button>
+        <script src="index.js"></script>
+      </div>
+    
+    </header>
+    
+    <div class="container-fluid" style="padding:128px 16px" id="show">
+      <div class="row">
+        <div class="col-md-8">
+    
+      <div id="imgdiv">
+    
+        </div>
+      </div>
+        <div class="col-md-4">
+        <div>
+          <video width="300" height="204" id="video" style="visibility:hidden" autoplay loop></vedio>
+        </div>
+    </div>
+    
+    
+    </div></div>
+    <p><button class="btn btn-danger btn-lg" onclick="remove()"><a href="#"><i class="fa fa-th"> </i> Clear</a></button></p>
+     </body>
+    
+    </html>
+    
