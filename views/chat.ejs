@@ -31,11 +31,9 @@
       height: 100%;
       line-height: 1.8;
       
-
   background: -webkit-linear-gradient(330deg, #000, #f0a6ca);
   background: linear-gradient(120deg, #000, #f0a6ca);
   overflow: hidden;
-
     }
     #img{
     width:100; height:100;}
@@ -63,19 +61,18 @@
     
       </style>
       <script src="/js/play.js"></script>
+      
 <script>
 	var socket = io.connect('http://localhost:5000');
-
 	// on connection to server, ask for user's name with an anonymous callback
 	socket.on('connect', function(){
         // call the server-side function 'adduser' and send one parameter (value of prompt)
-         var username=prompt("enter your chat NAme");
+         var username=prompt("enter your chat Name");
            
         
         console.log(username);
 		socket.emit('adduser', username);
 	});
-
 	// listener, whenever the server emits 'updatechat', this updates the chat body
 	socket.on('updatechat', function (username, data) {
         data=data.toLowerCase();
@@ -94,7 +91,6 @@
 			$('#users').append('<div>' + key + '</div>');
 		});
 	});
-
 	// on load of page
 	$(function(){
 		// when the client clicks SEND
@@ -104,7 +100,6 @@
 			// tell server to execute 'sendchat' and send along one parameter
 			socket.emit('sendchat', message);
 		});
-
 		// when the client hits ENTER on their keyboard
 		$('#data').keypress(function(e) {
 			if(e.which == 13) {
@@ -113,7 +108,6 @@
 			}
 		});
 	});
-
 </script>
 </head>
 <body >
@@ -125,7 +119,7 @@
     <div id="conversation"style ="color:white"></div>
      <!-- textbox & keyboard -->
      <div id="container">
-        <input id="write" contenteditable="true"></div>
+        <div id="write" contenteditable="true"></div>
         <ul id="keyboard" style="display:none">
             <li class="symbol"><span class="off">`</span><span class="on">~</span></li>
             <li class="symbol"><span class="off"><img src="1.png" height="40px" width="40px"></span><span
@@ -192,6 +186,7 @@
             <li class="right-shift lastitem">shift</li>
             <li class="space lastitem">space&nbsp;</li>
         </ul>
+    </div>
     </div>
     <br><br><br><br><br><br>
     <input type="checkbox" name="enable_keyboard" onclick="showKeyboard()" id="enable_keyboard"> Enable On-Screen Keyboard

@@ -1,7 +1,7 @@
 
      function play(msg,x)
      {
-      /*var msg=document.getElementById("write").innerHTML;
+      var msg=document.getElementById("write").innerHTML;
       msg=msg.toLowerCase();
       var checkbox = document.getElementById('enable_keyboard');
       if (checkbox.checked == true){
@@ -33,11 +33,9 @@
           }
           ++j;
         }}
-  
-      else{
-  document.getElementById('a').href="#show";*/
    
-        console.log(msg);
+        else{
+          console.log(msg);
         var wlen=msg.length,k=x;
         var word="";
        
@@ -57,7 +55,7 @@
         ++k;
           }
     
-    }
+    }}
   //play()close
 
     
@@ -102,11 +100,14 @@
     source.setAttributeNode(sid);
              video.appendChild(source);
              video.style.visibility="visible";
-             var autoplay=document.createAttribute('autoplay');
-             autoplay.value=true;
-             video.setAttribute(autoplay);
-             $('#conversation').append( video);
-           play(strLn);
+             video.autoplay=true;
+             video.loop=true;
+             //var autoplay=document.createAttribute('autoplay');
+             //autoplay.value=true;
+             //video.setAttribute(autoplay)
+             play(strLn);
+             $('#conversation').append(video);
+           
            
         }// http status checking if close
        else
